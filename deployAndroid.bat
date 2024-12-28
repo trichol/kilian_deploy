@@ -29,7 +29,7 @@ flutter build apk --release
 REM Build AppBundle in release mode
 flutter build appbundle --release
 
-keytool -printcert -jarfile  %DEST_DIR%\build\app\outputs\flutter-apk\app-release.apk
+
 
 REM Pause to see the output
 pause

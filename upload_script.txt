@@ -1,0 +1,4 @@
+open FREEPARTNER
+ls /home/clients/53fed8f728e93cc6494c219aa23209ff/sites/freepartner.fr
+put E:\WORK\PROJETS\WORKSPACE\kilian_flutter_export\kilian\build\app\outputs\flutter-apk\app-release.apk   kilian/android/kilian.apk 
+exit
