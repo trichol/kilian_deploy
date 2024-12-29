@@ -1,22 +1,51 @@
-# cd $HOME/Documents/WORKSPACE/kilian_deploy
-# git reset --hard HEAD
-# git pull
-# git log --oneline -5
-
-
 
 
 
 cd $HOME/Documents/WORKSPACE/kilian
+
+
+
+rm -rf  .DS_Store
+rm -rf  .dart_tool/
+rm -rf  .flutter-plugins
+rm -rf  .flutter-plugins-dependencies
+rm -rf  .idea/
+rm -rf  build/
+rm -rf  ios/.DS_Store
+rm -rf  ios/Podfile.lock
+rm -rf  ios/Runner/.DS_Store
+rm -rf  ios/Runner/Assets.xcassets/.DS_Store
+rm -rf  pubspec.lock
+
+
+
+
 git reset --hard HEAD
 git pull
 git log --oneline -5
 
+open iOS/Runner.xcodeproj
 
 
- rm -rf $HOME/Documents/WORKSPACE/kilian/ios/Runner/Assets.xcassets/AppIcon.appiconset
+exit
 
- cp -R  $HOME/Documents/WORKSPACE/kilian_deploy/AppIcon.appiconset     $HOME/Documents/WORKSPACE/kilian/ios/Runner/Assets.xcassets/
+
+flutter doctor
+flutter pub getflutter clean
+flutter pub get
+pod install
+rm -rf $HOME/Documents/WORKSPACE/kilian/ios/Runner/Assets.xcassets/AppIcon.appiconset
+cp -R  $HOME/Documents/WORKSPACE/kilian_deploy/AppIcon.appiconset     $HOME/Documents/WORKSPACE/kilian/ios/Runner/Assets.xcassets/
+flutter build ios --release
+
+cd iOS
+
+xcodebuild -workspace Runner.xcworkspace -scheme Runner -configuration Release -archivePath build/Runner.xcarchive archive
+
+xcodebuild -exportArchive -archivePath build/Runner.xcarchive -exportOptionsPlist ../../kilian_deploy/ExportOptions.plist -exportPath build/Runner
+
+
+
 
 
 xcrun simctl uninstall booted com.freepartners.kilian
