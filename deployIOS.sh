@@ -64,7 +64,7 @@ cd iOS
 
 xcodebuild -workspace Runner.xcworkspace -scheme Runner -configuration Release -archivePath build/Runner.xcarchive archive
 
-xcodebuild -exportArchive -archivePath build/Runner.xcarchive -exportOptionsPlist ../../kilian_deploy/ExportOptions${DEVICE_NAME}.plist -exportPath build/Runner
+xcodebuild -exportArchive -archivePath build/Runner.xcarchive -exportOptionsPlist ../../kilian_deploy/ExportOptions${DEVICE_NAME}.plist -exportPath build/exported
 
 
 
