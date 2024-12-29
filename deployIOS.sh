@@ -29,7 +29,7 @@ rm -rf  .dart_tool/
 rm -rf  .flutter-plugins
 rm -rf  .flutter-plugins-dependencies
 rm -rf  .idea/
-rm -rf  build/
+# rm -rf  build/
 rm -rf  ios/.DS_Store
 rm -rf  ios/Podfile.lock
 rm -rf  ios/Runner/.DS_Store
@@ -64,7 +64,7 @@ cd iOS
 
 xcodebuild -workspace Runner.xcworkspace -scheme Runner -configuration Release -archivePath build/Runner.xcarchive archive
 
-xcodebuild -exportArchive -archivePath build/Runner.xcarchive -exportOptionsPlist ../../kilian_deploy/ExportOptions.plist -exportPath build/Runner
+xcodebuild -exportArchive -archivePath build/Runner.xcarchive -exportOptionsPlist ../../kilian_deploy/ExportOptions${DEVICE_NAME}.plist -exportPath build/Runner
 
 
 
