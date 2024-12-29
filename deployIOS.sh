@@ -1,7 +1,26 @@
+clear
 
+#!/bin/bash
+
+# Replace this with the actual device name
+DEVICE_NAME=$(hostname) # Example: Get device name from the system (can be customized)
+
+# Construct the file path
+PROJECT_FILE_PATH="$HOME/Documents/WORKSPACE/kilian_deploy/project${DEVICE_NAME}.pbxproj"
+
+# Check if the file exists
+if [ ! -f "$PROJECT_FILE_PATH" ]; then
+  echo "Error: File '$PROJECT_FILE_PATH' does not exist." >&2
+  exit 1
+else
+  echo "File '$PROJECT_FILE_PATH' exists."
+fi
 
 
 cd $HOME/Documents/WORKSPACE/kilian
+
+
+git status
 
 
 
@@ -23,17 +42,22 @@ rm -rf  pubspec.lock
 git reset --hard HEAD
 git pull
 git log --oneline -5
+cp -rf $HOME/Documents/WORKSPACE/kilian_deploy/project.pbxproj $HOME/Documents/WORKSPACE/kilian/ios/Runner.xcodeproj/
 
-open iOS/Runner.xcodeproj
+# cp -rf $HOME/Documents/WORKSPACE/kilian/ios/Runner.xcodeproj/project.pbxproj    $HOME/Documents/WORKSPACE/kilian_deploy/
+
+git status
+# open iOS/Runner.xcodeproj
 
 
-exit
+
 
 
 flutter doctor
-flutter pub getflutter clean
 flutter pub get
+flutter clean
 pod install
+flutter pub get
 rm -rf $HOME/Documents/WORKSPACE/kilian/ios/Runner/Assets.xcassets/AppIcon.appiconset
 cp -R  $HOME/Documents/WORKSPACE/kilian_deploy/AppIcon.appiconset     $HOME/Documents/WORKSPACE/kilian/ios/Runner/Assets.xcassets/
 flutter build ios --release
@@ -42,7 +66,9 @@ cd iOS
 
 xcodebuild -workspace Runner.xcworkspace -scheme Runner -configuration Release -archivePath build/Runner.xcarchive archive
 
-xcodebuild -exportArchive -archivePath build/Runner.xcarchive -exportOptionsPlist ../../kilian_deploy/ExportOptions.plist -exportPath build/Runner
+xcodebuild -exportArchive -archivePath build/Runner.xcarchive -exportOptionsPlist ../../kilian_deploy/ExportOptions.plist -exportPath build/Runner
+
+
 
 
 
