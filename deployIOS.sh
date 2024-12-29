@@ -6,7 +6,7 @@ clear
 DEVICE_NAME=$(hostname) # Example: Get device name from the system (can be customized)
 
 # Construct the file path
-PROJECT_FILE_PATH="$HOME/Documents/WORKSPACE/kilian_deploy/project${DEVICE_NAME}.pbxproj"
+PROJECT_FILE_PATH=$HOME/Documents/WORKSPACE/kilian_deploy/project${DEVICE_NAME}.pbxproj
 
 # Check if the file exists
 if [ ! -f "$PROJECT_FILE_PATH" ]; then
@@ -42,16 +42,14 @@ rm -rf  pubspec.lock
 git reset --hard HEAD
 git pull
 git log --oneline -5
-cp -rf $HOME/Documents/WORKSPACE/kilian_deploy/project.pbxproj $HOME/Documents/WORKSPACE/kilian/ios/Runner.xcodeproj/
 
-# cp -rf $HOME/Documents/WORKSPACE/kilian/ios/Runner.xcodeproj/project.pbxproj    $HOME/Documents/WORKSPACE/kilian_deploy/
+
+cp -rf $PROJECT_FILE_PATH $HOME/Documents/WORKSPACE/kilian/ios/Runner.xcodeproj/project.pbxproj
 
 git status
 # open iOS/Runner.xcodeproj
 
-
-
-
+# exit
 
 flutter doctor
 flutter pub get
