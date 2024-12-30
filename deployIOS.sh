@@ -98,33 +98,4 @@ xcodebuild -workspace Runner.xcworkspace -scheme Runner -configuration Release -
 
 xcodebuild -exportArchive -archivePath build/Runner.xcarchive -exportOptionsPlist ../../kilian_deploy/ExportOptions${DEVICE_NAME}.plist -exportPath build/exported
 
-
-
 xcrun altool --upload-app   --type ios   --file build/exported/kilian.ipa  --username "thierry.richol@freepartner.fr"   --password "ixik-vvas-jobp-dlhf"
-
-
-
-
-
-
-xcrun simctl uninstall booted com.freepartners.kilian
-
-
-# Variables
-FTP_SERVER="yr3bv.ftp.infomaniak.com"
-FTP_LOGIN="yr3bv_trichol"
-FTP_PASSWORD="Taitai44!"
-LOCAL_FILE=$HOME/Documents/WORKSPACE/kilian
-
-# Upload file using curl
-curl -T "$LOCAL_FILE" "ftp://$FTP_SERVER/" --user "$FTP_LOGIN:$FTP_PASSWORD"
-
-# Check if upload was successful
-if [ $? -eq 0 ]; then
-  echo "File uploaded successfully to $FTP_SERVER"
-else
-  echo "Failed to upload file to $FTP_SERVER"
-fi
-
-
-# flutter run -d 626CA41B-EBD2-4293-A575-7538FC735A5F
