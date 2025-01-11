@@ -43,8 +43,8 @@ if [ "$DEVICE_NAME" = "EU743" ]; then
 elif [ "$DEVICE_NAME" = "EU964" ]; then
   # open -a Simulator
   sleep 15
-  xcrun simctl uninstall 626CA41B-EBD2-4293-A575-7538FC735A5F com.freepartners.kilian
-  flutter run -d 626CA41B-EBD2-4293-A575-7538FC735A5F
+  xcrun simctl uninstall E59944E8-A367-46E5-B9DB-EB6A3A8613F5 com.freepartners.kilian
+  flutter run -d E59944E8-A367-46E5-B9DB-EB6A3A8613F5
 else
   echo "Error: Invalid DEVICE_NAME."
   exit 1
