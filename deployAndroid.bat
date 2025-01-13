@@ -8,9 +8,7 @@ echo Destination Directory: %DEST_DIR%
 
 cd /d %DEST_DIR%\kilian
 
-git reset --hard HEAD
-git pull
-git log --oneline -5
+rem git reset --hard HEAD; git pull; git log --oneline -5
  
 
 :: Call the function for each directory
@@ -21,35 +19,32 @@ call :replace_directory "%SOURCE_DIR%\kilian_deploy\android\mipmap-xxhdpi" "%DES
 call :replace_directory "%SOURCE_DIR%\kilian_deploy\android\mipmap-xxxhdpi" "%DEST_DIR%\kilian\android\app\src\main\res\mipmap-xxxhdpi"
 
 
-
-
 REM Build APK in release mode
 flutter build apk --release
 
 REM Build AppBundle in release mode
 flutter build appbundle --release
 
+REM aapt dump badging %SOURCE_DIR%\kilian\build\app\outputs\flutter-apk\app-release.apk | findstr "versionName"
+REM aapt dump badging %SOURCE_DIR%\kilian\build\app\outputs\flutter-apk\app-release.apk | findstr "versionCode"
 
-rem Path to WinSCP executable
-set WINSCP_PATH="C:\Program Files (x86)\WinSCP\WinSCP.com"
-rem Path to script file
-set SCRIPT_PATH=%SOURCE_DIR%\kilian_deploy\upload_script.txt
-
-rem Run WinSCP with the script
-%WINSCP_PATH% /script=%SCRIPT_PATH%
-
-rem Check if the upload was successful
-if %errorlevel% equ 0 (
-    echo Upload succeeded.
-) else (
-    echo Upload failed.
-)
+REM a disposition pour google play
+copy /y  %SOURCE_DIR%\kilian\build\app\outputs\bundle\release\app-release.aab E:\WORK\PROJETS\WORKSPACE\VERSION\ANDROID_STUDIO\app-release.aab
 
 
+echo Step 1 complete.
+echo Update googlePlay with version then press Enter to proceed to the next step...
+pause >nul
 
 
-REM Pause to see the output
-pause
+cd /d %DEST_DIR%\kilian_deploy
+.\push.bat %1
+
+echo Step 2 complete.
+echo Press Enter to finish...
+pause >nul
+
+echo All steps completed!
 
 
 :: Function to replace directories
