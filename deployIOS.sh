@@ -20,14 +20,14 @@ fi
 #!/bin/bash
 
 # Check if an argument is provided
-if [ -z "$1" ]; then
-  echo "Error: Missing build number argument."
-  echo "Usage: ./update_version.sh <build_number>"
-  exit 1
-fi
+# if [ -z "$1" ]; then
+#  echo "Error: Missing build number argument."
+#  echo "Usage: ./update_version.sh <build_number>"
+#  exit 1
+# fi
 
 # Argument passed as the build number
-BUILD_NUMBER=$1
+# BUILD_NUMBER=$1
 
 # Path to pubspec.yaml
 PUBSPEC_FILE=$HOME/Documents/WORKSPACE/kilian/pubspec.yaml
