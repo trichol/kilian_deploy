@@ -65,16 +65,16 @@ git pull
 git log --oneline -5
 
 # Update the version field in pubspec.yaml
-sed -i.bak -E "s/^version: ([0-9]+\.[0-9]+\.[0-9]+)\+[0-9]+/version: \1+$BUILD_NUMBER/" "$PUBSPEC_FILE"
+# sed -i.bak -E "s/^version: ([0-9]+\.[0-9]+\.[0-9]+)\+[0-9]+/version: \1+$BUILD_NUMBER/" "$PUBSPEC_FILE"
 
 # Check if the update was successful
-if [ $? -eq 0 ]; then
-  echo "Version updated successfully in pubspec.yaml to include build number: $BUILD_NUMBER"
-  echo "Backup created as pubspec.yaml.bak"
-else
-  echo "Error: Failed to update version in pubspec.yaml."
-  exit 1
-fi
+# if [ $? -eq 0 ]; then
+#  echo "Version updated successfully in pubspec.yaml to include build number: $BUILD_NUMBER"
+#  echo "Backup created as pubspec.yaml.bak"
+# else
+#  echo "Error: Failed to update version in pubspec.yaml."
+#  exit 1
+# fi
 
 cp -rf $PROJECT_FILE_PATH $HOME/Documents/WORKSPACE/kilian/ios/Runner.xcodeproj/project.pbxproj
 
