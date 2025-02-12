@@ -78,7 +78,7 @@ git log --oneline -5
 
 cp -rf $PROJECT_FILE_PATH $HOME/Documents/WORKSPACE/kilian/ios/Runner.xcodeproj/project.pbxproj
 
-git status
+
 # open iOS/Runner.xcodeproj
 
 # exit
@@ -88,16 +88,18 @@ flutter pub get
 flutter clean
 pod install
 flutter pub get
+
+git status
+
+# exit
+
+
 rm -rf $HOME/Documents/WORKSPACE/kilian/ios/Runner/Assets.xcassets/AppIcon.appiconset
 cp -R  $HOME/Documents/WORKSPACE/kilian_deploy/AppIcon.appiconset     $HOME/Documents/WORKSPACE/kilian/ios/Runner/Assets.xcassets/
 cp -R  $HOME/Documents/WORKSPACE/kilian_deploy/Runner.entitlements     $HOME/Documents/WORKSPACE/kilian/ios/Runner/Runner.entitlements
 cp -R  $HOME/Documents/WORKSPACE/kilian_deploy/info.plist    $HOME/Documents/WORKSPACE/kilian/ios/Runner/info.plist
 flutter build ios --release
-
 cd iOS
-
 xcodebuild -workspace Runner.xcworkspace -scheme Runner -configuration Release -archivePath build/Runner.xcarchive archive
-
 xcodebuild -exportArchive -archivePath build/Runner.xcarchive -exportOptionsPlist ../../kilian_deploy/ExportOptions${DEVICE_NAME}.plist -exportPath build/exported
-
 xcrun altool --upload-app   --type ios   --file build/exported/kilian.ipa  --username "thierry.richol@freepartner.fr"   --password "ixik-vvas-jobp-dlhf"
