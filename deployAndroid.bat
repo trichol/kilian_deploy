@@ -8,8 +8,14 @@ echo Destination Directory: %DEST_DIR%
 
 cd /d %DEST_DIR%\kilian
 
-rem git reset --hard HEAD; git pull; git log --oneline -5
- 
+git reset --hard HEAD
+git pull
+git log --oneline -5
+
+echo Step 1 complete.
+echo Update pubspec.yaml with version build and build.gradle to release...
+pause >nul
+
 
 :: Call the function for each directory
 call :replace_directory "%SOURCE_DIR%\kilian_deploy\android\mipmap-hdpi" "%DEST_DIR%\kilian\android\app\src\main\res\mipmap-hdpi"
@@ -20,10 +26,10 @@ call :replace_directory "%SOURCE_DIR%\kilian_deploy\android\mipmap-xxxhdpi" "%DE
 
 
 REM Build APK in release mode
-flutter build apk --release
+call flutter build apk --release
 
 REM Build AppBundle in release mode
-flutter build appbundle --release
+call flutter build appbundle --release
 
 REM aapt dump badging %SOURCE_DIR%\kilian\build\app\outputs\flutter-apk\app-release.apk | findstr "versionName"
 REM aapt dump badging %SOURCE_DIR%\kilian\build\app\outputs\flutter-apk\app-release.apk | findstr "versionCode"
@@ -32,17 +38,17 @@ REM a disposition pour google play
 copy /y  %SOURCE_DIR%\kilian\build\app\outputs\bundle\release\app-release.aab E:\WORK\PROJETS\WORKSPACE\VERSION\ANDROID_STUDIO\app-release.aab
 
 
-echo Step 1 complete.
-echo Update googlePlay with version then press Enter to proceed to the next step...
-pause >nul
-
-
-cd /d %DEST_DIR%\kilian_deploy
-.\push.bat %1
-
 echo Step 2 complete.
-echo Press Enter to finish...
-pause >nul
+echo Update googlePlay with version then press Enter to proceed to the next step...
+REM pause >nul
+
+
+REM cd /d %DEST_DIR%\kilian_deploy
+REM .\push.bat %1
+
+REM echo Step 2 complete.
+REM echo Press Enter to finish...
+REM pause >nul
 
 echo All steps completed!
 
