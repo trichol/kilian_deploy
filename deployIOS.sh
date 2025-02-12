@@ -90,6 +90,8 @@ pod install
 flutter pub get
 rm -rf $HOME/Documents/WORKSPACE/kilian/ios/Runner/Assets.xcassets/AppIcon.appiconset
 cp -R  $HOME/Documents/WORKSPACE/kilian_deploy/AppIcon.appiconset     $HOME/Documents/WORKSPACE/kilian/ios/Runner/Assets.xcassets/
+cp -R  $HOME/Documents/WORKSPACE/kilian_deploy/Runner.entitlements     $HOME/Documents/WORKSPACE/kilian/ios/Runner/Runner.entitlements
+cp -R  $HOME/Documents/WORKSPACE/kilian_deploy/info.plist    $HOME/Documents/WORKSPACE/kilian/ios/Runner/info.plist
 flutter build ios --release
 
 cd iOS
