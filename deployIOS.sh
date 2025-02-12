@@ -20,14 +20,14 @@ fi
 #!/bin/bash
 
 # Check if an argument is provided
-if [ -z "$1" ]; then
-  echo "Error: Missing build number argument."
-  echo "Usage: ./update_version.sh <build_number>"
-  exit 1
-fi
+# if [ -z "$1" ]; then
+#  echo "Error: Missing build number argument."
+#  echo "Usage: ./update_version.sh <build_number>"
+#  exit 1
+# fi
 
 # Argument passed as the build number
-BUILD_NUMBER=$1
+# BUILD_NUMBER=$1
 
 # Path to pubspec.yaml
 PUBSPEC_FILE=$HOME/Documents/WORKSPACE/kilian/pubspec.yaml
@@ -65,20 +65,20 @@ git pull
 git log --oneline -5
 
 # Update the version field in pubspec.yaml
-sed -i.bak -E "s/^version: ([0-9]+\.[0-9]+\.[0-9]+)\+[0-9]+/version: \1+$BUILD_NUMBER/" "$PUBSPEC_FILE"
+# sed -i.bak -E "s/^version: ([0-9]+\.[0-9]+\.[0-9]+)\+[0-9]+/version: \1+$BUILD_NUMBER/" "$PUBSPEC_FILE"
 
 # Check if the update was successful
-if [ $? -eq 0 ]; then
-  echo "Version updated successfully in pubspec.yaml to include build number: $BUILD_NUMBER"
-  echo "Backup created as pubspec.yaml.bak"
-else
-  echo "Error: Failed to update version in pubspec.yaml."
-  exit 1
-fi
+# if [ $? -eq 0 ]; then
+#  echo "Version updated successfully in pubspec.yaml to include build number: $BUILD_NUMBER"
+#  echo "Backup created as pubspec.yaml.bak"
+# else
+#  echo "Error: Failed to update version in pubspec.yaml."
+#  exit 1
+# fi
 
 cp -rf $PROJECT_FILE_PATH $HOME/Documents/WORKSPACE/kilian/ios/Runner.xcodeproj/project.pbxproj
 
-git status
+
 # open iOS/Runner.xcodeproj
 
 # exit
@@ -88,14 +88,18 @@ flutter pub get
 flutter clean
 pod install
 flutter pub get
+
+git status
+
+# exit
+
+
 rm -rf $HOME/Documents/WORKSPACE/kilian/ios/Runner/Assets.xcassets/AppIcon.appiconset
 cp -R  $HOME/Documents/WORKSPACE/kilian_deploy/AppIcon.appiconset     $HOME/Documents/WORKSPACE/kilian/ios/Runner/Assets.xcassets/
+cp -R  $HOME/Documents/WORKSPACE/kilian_deploy/Runner.entitlements     $HOME/Documents/WORKSPACE/kilian/ios/Runner/Runner.entitlements
+cp -R  $HOME/Documents/WORKSPACE/kilian_deploy/info.plist    $HOME/Documents/WORKSPACE/kilian/ios/Runner/info.plist
 flutter build ios --release
-
 cd iOS
-
 xcodebuild -workspace Runner.xcworkspace -scheme Runner -configuration Release -archivePath build/Runner.xcarchive archive
-
 xcodebuild -exportArchive -archivePath build/Runner.xcarchive -exportOptionsPlist ../../kilian_deploy/ExportOptions${DEVICE_NAME}.plist -exportPath build/exported
-
 xcrun altool --upload-app   --type ios   --file build/exported/kilian.ipa  --username "thierry.richol@freepartner.fr"   --password "ixik-vvas-jobp-dlhf"
