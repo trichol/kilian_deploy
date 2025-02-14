@@ -88,6 +88,7 @@ flutter pub get
 flutter clean
 pod install
 flutter pub get
+flutter pub add collection:^1.18.0
 
 git status
 

@@ -12,6 +12,12 @@ git reset --hard HEAD
 git pull
 git log --oneline -5
 
+call flutter doctor
+call flutter clean
+call flutter pub get
+
+call flutter  pub add collection:^1.18.0
+
 echo Step 1 complete.
 echo Update pubspec.yaml with version build and build.gradle to release...
 pause >nul
@@ -51,7 +57,7 @@ REM echo Press Enter to finish...
 REM pause >nul
 
 echo All steps completed!
-
+exit /b
 
 :: Function to replace directories
 :replace_directory
