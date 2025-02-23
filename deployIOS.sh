@@ -1,7 +1,11 @@
 clear
 
 #!/bin/bash
-
+# dart pub global activate fvm
+# fvm list
+# fvm install 3.27.3
+# fvm use 3.27.3
+export PATH="$HOME/fvm/versions/3.27.3/bin":"$PATH"
 # Replace this with the actual device name
 DEVICE_NAME=$(hostname) # Example: Get device name from the system (can be customized)
 
@@ -53,6 +57,7 @@ rm -rf  .idea/
 rm -rf  build/
 rm -rf  ios/.DS_Store
 rm -rf  ios/Podfile.lock
+rm -rf  ios/build
 rm -rf  ios/Runner/.DS_Store
 rm -rf  ios/Runner/Assets.xcassets/.DS_Store
 rm -rf  pubspec.lock
@@ -64,6 +69,8 @@ git reset --hard HEAD
 git pull
 git log --oneline -5
 
+# exit
+
 # Update the version field in pubspec.yaml
 # sed -i.bak -E "s/^version: ([0-9]+\.[0-9]+\.[0-9]+)\+[0-9]+/version: \1+$BUILD_NUMBER/" "$PUBSPEC_FILE"
 
@@ -71,10 +78,10 @@ git log --oneline -5
 # if [ $? -eq 0 ]; then
 #  echo "Version updated successfully in pubspec.yaml to include build number: $BUILD_NUMBER"
 #  echo "Backup created as pubspec.yaml.bak"
-# else
+#else
 #  echo "Error: Failed to update version in pubspec.yaml."
 #  exit 1
-# fi
+#fi
 
 cp -rf $PROJECT_FILE_PATH $HOME/Documents/WORKSPACE/kilian/ios/Runner.xcodeproj/project.pbxproj
 
@@ -88,7 +95,6 @@ flutter pub get
 flutter clean
 pod install
 flutter pub get
-flutter pub add collection:^1.18.0
 
 git status
 
