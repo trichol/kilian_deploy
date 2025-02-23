@@ -16,7 +16,8 @@ call flutter doctor
 call flutter clean
 call flutter pub get
 
-call flutter  pub add collection:^1.18.0
+rem call flutter  pub add collection:^1.18.0
+rem call flutter pub add collection:^1.19.0
 
 echo Step 1 complete.
 echo Update pubspec.yaml with version build and build.gradle to release...
